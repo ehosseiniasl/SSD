@@ -21,7 +21,7 @@ SOLVER:
   MAX_ITER: 400000
   LR_STEPS: [280000, 360000]
   GAMMA: 0.1
-  BATCH_SIZE: 32
+  BATCH_SIZE: 128
   LR: 1e-3
 
-OUTPUT_DIR: 'outputs/mobilenet_v2_ssd320_coco_trainval35k'
+OUTPUT_DIR: 'outputs/mobilenet_v2_ssd320_coco_trainval35k_batch128'

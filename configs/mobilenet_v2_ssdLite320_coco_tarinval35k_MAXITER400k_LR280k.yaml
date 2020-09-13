@@ -6,6 +6,7 @@ MODEL:
     NAME: 'mobilenet_v2'
     OUT_CHANNELS: (96, 1280, 512, 256, 256, 64)
   PRIORS:
+    # features of CNN layer after each feature extraction layer
     FEATURE_MAPS: [20, 10, 5, 3, 2, 1]
     STRIDES: [16, 32, 64, 107, 160, 320]
     MIN_SIZES: [60, 105, 150, 195, 240, 285]
@@ -17,11 +18,12 @@ INPUT:
 DATASETS:
   TRAIN: ("coco_2014_train", "coco_2014_valminusminival")
   TEST: ("coco_2014_minival", )
+
 SOLVER:
   MAX_ITER: 400000
   LR_STEPS: [280000, 360000]
   GAMMA: 0.1
-  BATCH_SIZE: 32
+  BATCH_SIZE: 24
   LR: 1e-3
 
-OUTPUT_DIR: 'outputs/mobilenet_v2_ssd320_coco_trainval35k'
+OUTPUT_DIR: 'outputs/mobilenet_v2_ssdLite320_coco_trainval35k_MAXITER400k_LR280k'
