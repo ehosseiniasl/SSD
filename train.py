@@ -36,10 +36,10 @@ def train(cfg, args):
     # scheduler = make_lr_scheduler(cfg, optimizer, milestones)
 
     if args.scheduler == 'cosine':
-        scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=cfg.SOLVER.MAX_ITER / 50, eta_min=0.026666)
+        scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=cfg.SOLVER.MAX_ITER, eta_min=0.026666)
         # scheduler = lr_scheduler.CosineAnnealingLR(optimizer, T_max=100, eta_min=0.026666)
     elif args.scheduler == 'cosine_warmup':
-        scheduler = lr_scheduler.CosineAnnealingWarmRestarts(optimizer, T_0=int(cfg.SOLVER.MAX_ITER / 50), eta_min=0.026666)
+        scheduler = lr_scheduler.CosineAnnealingWarmRestarts(optimizer, T_0=int(cfg.SOLVER.MAX_ITER), eta_min=0.026666)
     else:
         scheduler = make_lr_scheduler(cfg, optimizer, milestones)
 

@@ -3,7 +3,8 @@ import torch.nn.functional as F
 import torch
 
 from ssd.utils import box_utils
-
+import numpy as np
+import ipdb
 
 class MultiBoxLoss(nn.Module):
     def __init__(self, neg_pos_ratio):
@@ -32,7 +33,8 @@ class MultiBoxLoss(nn.Module):
 
         confidence = confidence[mask, :]
         classification_loss = F.cross_entropy(confidence.view(-1, num_classes), labels[mask], reduction='sum')
-
+        if torch.isnan(classification_loss):
+            ipdb.set_trace()
         pos_mask = labels > 0
         predicted_locations = predicted_locations[pos_mask, :].view(-1, 4)
         gt_locations = gt_locations[pos_mask, :].view(-1, 4)

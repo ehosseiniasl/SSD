@@ -1,0 +1,34 @@
+MODEL:
+  NUM_CLASSES: 81
+  BOX_HEAD:
+    PREDICTOR: 'SSDLiteBoxPredictor'
+  BACKBONE:
+    NAME: 'mobilenet_v2'
+    OUT_CHANNELS: (96, 1280, 512, 256, 256, 64)
+  PRIORS:
+    # features of CNN layer after each feature extraction layer
+    FEATURE_MAPS: [20, 10, 5, 3, 2, 1]
+    STRIDES: [16, 32, 64, 107, 160, 320]
+    MIN_SIZES: [20.48, 51.2, 133.12, 215.04, 296.96, 378.88, 460.8]
+    MAX_SIZES: [51.2, 133.12, 215.04, 296.96, 378.88, 460.8, 542.72]
+#    MIN_SIZES: [60, 105, 150, 195, 240, 285]
+#    MAX_SIZES: [105, 150, 195, 240, 285, 330]
+    ASPECT_RATIOS: [[2, 3], [2, 3], [2, 3], [2, 3], [2, 3], [2, 3]]
+    BOXES_PER_LOCATION: [6, 6, 6, 6, 6, 6]
+INPUT:
+  IMAGE_SIZE: 320
+DATASETS:
+  TRAIN: ("coco_2014_train", "coco_2014_valminusminival")
+  TEST: ("coco_2014_minival", )
+
+SOLVER:
+  MAX_ITER: 400000
+#  LR_STEPS: [280000, 360000]
+  GAMMA: 0.1
+  BATCH_SIZE: 256
+  LR: 8e-2
+
+TEST:
+  BATCH_SIZE: 96
+
+OUTPUT_DIR: 'outputs/mobilenet_v2_ssdLite320_coco_trainval35k_MAXITER400k_cosine_warmup'
